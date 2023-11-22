@@ -19,5 +19,10 @@ pipeline {
                 deploy adapters: [tomcat9(credentialsId: 'tomcat-user', path: '', url: 'http://54.85.43.193:8080/')], contextPath: null, war: '**/*.war'
             }
         }
+        post {
+        always {
+            emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: '$DEFAULT_REPLYTO'
+            }
+        }    
     }
 }
